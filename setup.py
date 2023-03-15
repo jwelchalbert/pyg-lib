@@ -8,6 +8,8 @@ import os
 import os.path as osp
 import subprocess
 import warnings
+import sys
+print(sys.path)
 import torch 
 
 from setuptools import Extension, find_packages, setup
