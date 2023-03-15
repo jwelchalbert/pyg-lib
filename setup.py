@@ -103,7 +103,7 @@ def maybe_append_with_mkl(dependencies):
             dependencies.append(f'mkl-include=={product_version}')
 
 
-install_requires = []
+install_requires = ["torch==1.13.1"]
 maybe_append_with_mkl(install_requires)
 
 triton_requires = [
