@@ -8,6 +8,7 @@ import os
 import os.path as osp
 import subprocess
 import warnings
+import torch 
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext
@@ -37,8 +38,6 @@ class CMakeBuild(build_ext):
 
     def build_extension(self, ext):
         import sysconfig
-
-        import torch
 
         extdir = os.path.abspath(osp.dirname(self.get_ext_fullpath(ext.name)))
         self.build_type = "DEBUG" if self.debug else "RELEASE"
@@ -88,8 +87,6 @@ class CMakeBuild(build_ext):
 def maybe_append_with_mkl(dependencies):
     if CMakeBuild.check_env_flag('USE_MKL_BLAS'):
         import re
-
-        import torch
         torch_config = torch.__config__.show()
         with_mkl_blas = 'BLAS_INFO=mkl' in torch_config
         if torch.backends.mkl.is_available() and with_mkl_blas:
